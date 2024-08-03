@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# Building YouTube
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+For building any application we need the Requirements Clarification.
 
-## Available Scripts
+Discuss:
+1. Features Of The YouTube Application.
+2. Tech Stack Used To Build The Application. (We Should have the explanation for every single thing we are using in the tech stack here.)
+3. If we are using forms, we will be using Formik Library for the React.
+4. Are we using the Routing or not, what bundler are we using, testing library that we will be using in our system.
 
-In the project directory, you can run:
+We have to only spend 5 mins of the time here.
 
-### `npm start`
+Planning Things Up:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+We will be having Header(YouTube Logo, Searchbar, User icon), Sidebar (Certain Categories), Main Part (Certain Buttons, Videos).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If we click on a video, it will open up the new page and open the video and with a particular route. (/watch).
 
-### `npm test`
+This individual video will have a same header, some suggetions, some comments and like section.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We can think of certain components out of it and start building an application. (5-7 Mins are enough).
 
-### `npm run build`
+npx create-react-app: It already have a webpack setup with it in the react app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Everything here is done by React.js create-react-app.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We have a strict Mode here that is imported from the react.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Installing Tailwind CSS:
 
-### `npm run eject`
+```bash
+npm install -D tailwindcss
+npx tailwindcss init: In config file, we will tell tailwind what files need to be tracked inside here. It will include all the files
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+We don't need to take care of post css as create-react-app takes care of it already.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+We can check if the store is there in our system or not by using the extension of redux dev tools.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Ask Interviewer about how we will get the Data. Are we using any API for it or how we are getting the data here.
 
-## Learn More
+Youtube gives us an API here.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+When working with map, work if one is working and then apply the map.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We will be using the Debouncing concept to make our search bar work properly and will not make calls on every API Call here and if we write slow, it will make call for every key press.
 
-### Code Splitting
+If we are typing fast, the difference between the two key strokes is very less here, when we type slow we need results for every time we want the result here.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+If a lot of people simultaneously search for the same thing, we will be making a lot of API Calls here. So that is how it saves our time to make different calls and makes less number of API Calls.
 
-### Analyzing the Bundle Size
+This is called as Debouncing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+They show the results only to give the better user experience.
 
-### Making a Progressive Web App
+If the difference between 2 key strokes is < t, i will decline the api call and for t>200, i will make the api call and show the results.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Debouncing in YouTube will be really less as compared to Flipkart in time.
 
-### Advanced Configuration
+We can even develop the LRU cache in place of simple cache that we use for storing search results.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+In Youtube, they use 2 level deep comments. But we will build n level comments here.
 
-### Deployment
+## Challenges to build live chat
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Get Data Live: Data layer presents the Data live and to show to the user.
+2. Update the UI in efficient way and good a wonderful UI Experience to the User. (We cannot add or push th div tag continously here.)
 
-### `npm run build` fails to minify
+## How to handle Data of the application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Live data can be brought here in the application with the help of web sockets. (A handshake between the server and the UI). Initial connection takes some time here to establish the connection. We can send the data whenever we want to send.
+
+We can quickly send the data from either side and it is a bi-directional communication.
+
+In websockets connection, there is no interval but inside the API polling, we have an interval set here.
+
+In API Polling, the data is sent in the unidirectional flow. (eg: Gmail).
+
+Trading, Stock Market. (Would be build using API Polling).
+
+Interval of the website api call in api polling is determined from the use of the API that is being called and the data is used to access something from the API.
+
+Comments in Youtube uses API Polling in real.
+
+The Order Of Comments can differ here accordingly and might not be shown in the correct order.
+
+Whenever the messages explode on our screen, it quickly deletes the older messages out there.
+
+We can implement the Youtube accordingly to different browsers and how it saves the cache in Different Browsers out there.
+
+Always make one component and if it works fine, then only add the Map and map the values out there to make other components as well.\
+
+If we didn't removed the messages from the DOM, it will explode our page in DOM.
+
+In Infinite scroll, we can keep a store of videos and we put the offset to the store, once we scroll, make use of onScroll, then we will call the api then out there and it will make the infinite scroll work.
